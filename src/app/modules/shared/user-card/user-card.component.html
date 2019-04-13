@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="avatar">
+        <img src="{{user.avatar_url}}" alt="">
+    </div>
+    <div class="card-content">
+        <div class="username">
+            <h2>{{user.login}}</h2>
+            <h4>{{user.name}}</h4>
+            <p>{{user.bio}}</p>
+        </div>
+        <div class="skills">
+            <ul>
+                <li><strong>Public Repos</strong>: <span>{{user.public_repos}}</span></li>
+                <li><strong>Public Gists</strong>: <span>{{user.public_gists}}</span></li>
+                <li><strong>Followers</strong>: <span>{{user.followers}}</span></li>
+                <li><strong>Following</strong>: <span>{{user.following}}</span></li>
+            </ul>
+        </div>
+        <button class="button is-medium is-dark" (click)="clear()">Clear</button>
+    </div>
+</div>

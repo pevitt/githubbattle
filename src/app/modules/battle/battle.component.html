@@ -1,0 +1,61 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">Battle</h1>
+        <div class="columns users">
+            <div class="column">
+                <div class="user">
+                    <h3>User One</h3>
+                    <form [formGroup]="userOneForm" (ngSubmit)="submitUser(userOneForm)">
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium" type="text" placeholder="User 1" name="user_one" formControlName="userOne">
+                            </div>
+                            <p class="error has-text-danger is-size-7 is-uppercase has-text-weight-bold" *ngIf="manageUsers.userOne.errors.valid">User Empty</p>
+                            <p class="error has-text-danger is-size-7 is-uppercase has-text-weight-bold" *ngIf="manageUsers.userOne.errors.backend">Error User</p>
+                        </div>
+                        <button class="button is-medium is-primary" [ngClass]="{'is-loading': manageUsers.userOne.loading}"><span>Submit</span></button>
+                    </form>
+                </div>
+                <app-user-card *ngIf="userOne" [user]="userOne" (clearHandler)="clear($event, 'userOne')"></app-user-card>
+            </div>
+            <div class="column">
+                <div class="user">
+                    <h3>User Two</h3>
+                    <form [formGroup]="userTwoForm" (ngSubmit)="submitUser(userTwoForm)">
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-medium" type="text" placeholder="User 2" name="user_two" formControlName="userTwo">
+                            </div>
+                            <p class="error has-text-danger is-size-7 is-uppercase has-text-weight-bold" *ngIf="manageUsers.userTwo.errors.valid">User Empty</p>
+                            <p class="error has-text-danger is-size-7 is-uppercase has-text-weight-bold" *ngIf="manageUsers.userTwo.errors.backend">Error User</p>
+                        </div>
+                        <button class="button is-medium is-primary" [ngClass]="{'is-loading': manageUsers.userTwo.loading}"><span>Submit</span></button>
+                    </form>
+                </div>
+                <app-user-card *ngIf="userTwo" [user]="userTwo" (clearHandler)="clear($event, 'userTwo')"></app-user-card>
+            </div>
+        </div>
+        ​
+        <div class="btn-fight" *ngIf="userOne && userTwo">
+            <button class="button is-medium is-dark" (click)="fight()"><span>Fight</span></button>
+        </div>
+    </div>
+    ​
+    <div class="modal" [ngClass]="{'is-active': showResult}" *ngIf="showResult">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">RESULT</p>
+                <button class="delete" aria-label="close" (click)="closeResult()"></button>
+            </header>
+            <section class="modal-card-body">
+                <div *ngIf="usersTied; else elseBlock">
+                    <h3>Both users have the same result</h3>
+                </div>
+                <ng-template #elseBlock>
+                    <h3>Congratulations <strong>{{userWinner.login}}</strong> you're the winner!!!</h3>
+                </ng-template>
+            </section>
+        </div>
+    </div>
+</section>
